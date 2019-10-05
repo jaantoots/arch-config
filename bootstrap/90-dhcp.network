@@ -1,6 +1,0 @@
-[Match]
-Name=*
-
-[Network]
-DHCP=yes
-IPv6PrivacyExtensions=prefer-public
