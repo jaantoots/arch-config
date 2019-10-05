@@ -1,0 +1,201 @@
+---
+# common tasks for all hosts
+
+- name: upgrade system
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: install base packages
+  pacman:
+    name:
+    - arch-install-scripts
+    - base
+    - base-devel
+    - curl
+    - dosfstools
+    - etckeeper
+    - git
+    - grml-zsh-config
+    - htop
+    - intel-ucode
+    - iotop
+    - iperf3
+    - kexec-tools
+    - kitty-terminfo
+    - lshw
+    - lsof
+    - mlocate
+    - nethogs
+    - nfs-utils
+    - nftables
+    - openssh
+    - pacman-contrib
+    - pwgen
+    - reflector
+    - smartmontools
+    - sudo
+    - systemd
+    - systemd-resolvconf
+    - terminus-font
+    - tmux
+    - tree
+    - vim
+    - vnstat
+    - wget
+    - wireguard-arch
+    - wireguard-tools
+    - zsh
+
+- name: install extra packages
+  pacman:
+    name:
+    - archiso
+    - exfat-utils
+    - highlight
+    - jq
+    - lynx
+    - ntfs-3g
+    - openvpn
+    - pv
+    - ranger
+    - rsync
+    - speedtest-cli
+    - sshfs
+    - stunnel
+    - syncthing
+    - transmission-cli
+    - unzip
+    - xdelta3
+    - youtube-dl
+    - zsh-autosuggestions
+    - zsh-completions
+    - zsh-history-substring-search
+    - zsh-lovers
+    - zsh-syntax-highlighting
+
+- name: change root shell
+  user:
+    name: root
+    shell: /bin/zsh
+
+- name: create ansible user
+  user:
+    name: ansible
+    system: yes
+    groups:
+    - wheel
+    home: /var/lib/ansible
+    skeleton: /dev/null
+
+- name: add ansible authorized keys
+  authorized_key:
+    user: ansible
+    key: "{{ item }}"
+  loop: "{{ authorized_keys }}"
+
+- name: create group sudo
+  group:
+    name: sudo
+    system: yes
+
+- name: update sudoers
+  copy:
+    src: sudoers
+    dest: /etc/sudoers
+    mode: 0440
+    validate: /usr/bin/visudo -csf %s
+
+- name: create groups
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+  loop: "{{ base_groups }}"
+
+- name: create users
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    shell: /bin/zsh
+    skeleton: /dev/null
+    groups: "{{ item.groups }}"
+  loop: "{{ base_users }}"
+
+- name: add vconsole.conf
+  copy:
+    src: vconsole.conf
+    dest: /etc/vconsole.conf
+
+- name: add default DHCP network configuration
+  copy:
+    src: 90-dhcp.network
+    dest: /etc/systemd/network/
+  notify:
+  - restart networkd
+
+- name: add sshd configuration
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+  notify:
+  - reload sshd
+
+- name: generate WireGuard private key
+  shell: >
+    set -o pipefail && wg genkey |
+    install --mode 440 --group systemd-network /dev/stdin /etc/systemd/network/wg0.key
+  args:
+    creates: /etc/systemd/network/wg0.key
+    executable: /bin/bash
+
+- name: calculate WireGuard public key
+  shell: wg pubkey </etc/systemd/network/wg0.key >/etc/systemd/network/wg0.pub
+  args:
+    creates: /etc/systemd/network/wg0.pub
+
+- name: fetch WireGuard public key
+  fetch:
+    src: /etc/systemd/network/wg0.pub
+    dest: hosts
+
+- name: read WireGuard public key
+  slurp:
+    src: /etc/systemd/network/wg0.pub
+  register: wg_pubkey
+
+- name: add WireGuard configuration
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/systemd/network/{{ item }}"
+  loop:
+  - 50-wg0.netdev
+  - 50-wg0.network
+  notify:
+  - restart networkd
+
+- name: add WireGuard hosts
+  blockinfile:
+    path: /etc/hosts
+    block: |
+      # WireGuard VPN
+
+      {% for host in groups['all']|sort %}
+      {{ hostvars[host]['wg0_ipv4'] }} {{ host }}
+      {% endfor %}
+
+      {% for host in groups['all']|sort %}
+      {{ hostvars[host]['wg0_ipv6'] }} {{ host }}
+      {% endfor %}
+
+- name: start and enable services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+  - fstrim.timer
+  - sshd.service
+  - systemd-networkd.service
+  - systemd-resolved.service
+  - systemd-timesyncd.service
+  - vnstat.service

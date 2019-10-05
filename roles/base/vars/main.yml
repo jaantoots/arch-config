@@ -1,0 +1,4 @@
+---
+# base configuration variables
+
+wg_interface: wg0

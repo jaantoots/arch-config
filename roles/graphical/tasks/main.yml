@@ -1,0 +1,125 @@
+---
+# set up graphical and interactive tools
+
+- name: install interactive tools
+  pacman:
+    name:
+    - isync
+    - keybase
+    - khal
+    - khard
+    - msmtp
+    - msmtp-mta
+    - mutt-ics
+    - neomutt
+    - notmuch
+    - pass
+    - pass-otp
+    - rclone
+    - urlview
+    - vdirsyncer
+    - vifm
+
+- name: install graphical packages
+  pacman:
+    name:
+    - awesome-terminal-fonts
+    - browserpass
+    - browserpass-firefox
+    - caprine
+    - chrome-token-signing
+    - chromium
+    - dmenu
+    - dunst
+    - esteidpkcs11loader
+    - feh
+    - firefox
+    - firejail
+    - gnu-free-fonts
+    - gnumeric
+    - guvcview
+    - i3-wm
+    - i3lock-color
+    - i3status
+    - imagemagick
+    - kitty
+    - libnotify
+    - libreoffice-fresh
+    - mesa-demos
+    - mpv
+    - noto-fonts
+    - noto-fonts-cjk
+    - noto-fonts-emoji
+    - noto-fonts-extra
+    - pdfjs
+    - playerctl
+    - pulseaudio
+    - pulseaudio-alsa
+    - pulseaudio-bluetooth
+    - qdigidoc4
+    - qrencode
+    - qutebrowser
+    - riot-desktop
+    - rofi
+    - scrot
+    - signal
+    - spotify
+    - sxiv
+    - tigervnc
+    - ttf-croscore
+    - ttf-inconsolata
+    - ttf-liberation
+    - x11vnc
+    - xorg-server
+    - xorg-xdpyinfo
+    - xorg-xev
+    - xorg-xinit
+    - xorg-xinput
+    - xorg-xprop
+    - xterm
+    - zathura
+    - zathura-djvu
+    - zathura-pdf-mupdf
+    - zathura-ps
+    - zulip-desktop
+
+- name: install dev packages
+  pacman:
+    name:
+    - ansible
+    - ansible-lint
+    - aurutils
+    - aws-cli
+    - backblaze-b2
+    - balena-cli
+    - devtools
+    - gnuplot
+    - go
+    - graphviz
+    - mypy
+    - namcap
+    - opencv
+    - opencv-samples
+    - pandoc
+    - python-black
+    - python-h5py
+    - python-matplotlib
+    - python-pylint
+    - python-virtualenv
+    - terraform
+    - tesseract
+    - tesseract-data
+    - texlive-lang
+    - texlive-most
+
+- name: install container tools
+  pacman:
+    name:
+    - binfmt-qemu-static
+    - docker
+    - docker-compose
+    - lxc
+    - ovmf
+    - qemu
+    - qemu-arch-extra
+    - qemu-user-static

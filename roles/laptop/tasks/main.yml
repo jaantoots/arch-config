@@ -1,0 +1,21 @@
+---
+# laptop
+
+- name: install laptop packages
+  pacman:
+    name:
+    - acpilight
+    - bluez
+    - bluez-utils
+    - iw
+    - iwd
+    - powertop
+    - tlp
+
+- name: enable services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+  - iwd.service

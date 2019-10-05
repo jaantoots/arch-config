@@ -1,0 +1,12 @@
+[NetDev]
+Name=wg0
+Kind=wireguard
+
+[WireGuard]
+PrivateKeyFile=/etc/systemd/network/wg0.key
+
+[WireGuardPeer]
+PublicKey={{ wg0_bastion_pubkey }}
+Endpoint={{ wg0_bastion_endpoint }}
+PersistentKeepalive=25
+AllowedIPs={{ wg0_subnets | join(",") }}

@@ -1,0 +1,11 @@
+[Match]
+Name=wg0
+
+[Network]
+Address={{ wg0_ipv4 }}/32
+Address={{ wg0_ipv6 }}/64
+{% for item in wg0_subnets %}
+
+[Route]
+Destination={{ item }}
+{% endfor %}

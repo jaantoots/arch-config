@@ -1,0 +1,36 @@
+---
+# user setup
+
+- name: configure user home directory
+  become: yes
+  become_user: "{{ username }}"
+  block:
+  - name: fetch user public key
+    fetch:
+      src: ~/.ssh/id_ed25519.pub
+      dest: hosts
+      fail_on_missing: no
+
+  - name: initialise git repository
+    shell: "git init && git remote add origin {{ dotfiles | quote }}"
+    args:
+      chdir: "~"
+      creates: ~/.git
+
+  - name: add dotfiles
+    git:
+      repo: "{{ dotfiles }}"
+      dest: "~"
+      version: master
+      recursive: yes
+
+  - name: get git user config
+    template:
+      src: .gitconfig.local.j2
+      dest: ~/.gitconfig.local
+
+- name: add authorized keys for user
+  authorized_key:
+    user: "{{ username }}"
+    key: "{{ item }}"
+  loop: "{{ authorized_keys + authorized_keys_user_only }}"
