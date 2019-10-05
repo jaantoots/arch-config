@@ -187,6 +187,19 @@
       {{ hostvars[host]['wg0_ipv6'] }} {{ host }}
       {% endfor %}
 
+- name: add pacman configuration
+  template:
+    src: pacman.conf.j2
+    dest: /etc/pacman.conf
+  notify:
+  - add pacman key
+  - refresh pacman
+
+- name: add makepkg configuration
+  template:
+    src: makepkg.conf.j2
+    dest: /etc/makepkg.conf
+
 - name: start and enable services
   systemd:
     name: "{{ item }}"
