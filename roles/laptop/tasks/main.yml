@@ -12,10 +12,25 @@
     - powertop
     - tlp
 
-- name: enable services
+- name: add tlp configuration
+  copy:
+    src: tlp
+    dest: /etc/default/tlp
+  notify:
+  - restart tlp
+
+- name: start and enable services
   systemd:
     name: "{{ item }}"
     state: started
     enabled: yes
   loop:
   - iwd.service
+  - tlp.service
+
+- name: enable services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+  loop:
+  - tlp-sleep.service
