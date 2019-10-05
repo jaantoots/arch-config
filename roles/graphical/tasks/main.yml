@@ -20,6 +20,11 @@
     - vdirsyncer
     - vifm
 
+- name: add urlview configuration
+  copy:
+    src: system.urlview
+    dest: /etc/urlview/system.urlview
+
 - name: install graphical packages
   pacman:
     name:
