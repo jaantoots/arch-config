@@ -16,6 +16,14 @@ Manual tasks:
 - `base16_default-dark` command run
 - i3line compilation
 - xorg and lock screen backgrounds
+- add SSH key to cloud.jaantoots.org
+- password store repository clone
+- add SSH key to Github
+- clone `.private`
+- obtain GPG keys
+
+Maybe personal user configuration should not be in the scope of this
+repository?
 
 ## Notes
 
