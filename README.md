@@ -31,8 +31,6 @@ sed -nE '
         n;h;x;s/.*//;x;
         :a;n;/^$/bb;/- /!d;H;$bb;ba
     };h;d;
-    :b;x;s/^\n//;s/ +- (\w+)/\1/g;s/\n/ /g;s/.*/pactree -su \0/e;s/\n/ /g;s/.*/expac -S %m \0/e;s/\n/ /g;p;d
-    ' roles/*/tasks/main.yml |
-    xargs -L1 -I{} sh -c "echo {} | xargs -n1 | awk -v s=0 '{s += \$1;} END {print s;}'" |
-    numfmt --to=iec
+    :b;x;s/^\n//;s/ +- (\w+)/\1/g;s/\n/ /g;s/.*/pactree -su \0/e;s/\n/ /g;s/.*/expac -S %m \0/e;s/\n/+/g;p;d
+    ' roles/*/tasks/main.yml | bc | numfmt --to=iec
 ```
