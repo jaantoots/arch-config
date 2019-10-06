@@ -12,7 +12,6 @@
     - arch-install-scripts
     - base
     - base-devel
-    - curl
     - dosfstools
     - etckeeper
     - git
@@ -23,8 +22,15 @@
     - iperf3
     - kexec-tools
     - kitty-terminfo
+    - linux
+    - linux-firmware
+    - logrotate
     - lshw
     - lsof
+    - lvm2
+    - man-db
+    - man-pages
+    - mdadm
     - mlocate
     - nethogs
     - nfs-utils
@@ -32,19 +38,22 @@
     - openssh
     - pacman-contrib
     - pwgen
+    - python
     - reflector
     - smartmontools
     - sudo
-    - systemd
     - systemd-resolvconf
     - terminus-font
     - tmux
     - tree
+    - usbutils
+    - vi
     - vim
     - vnstat
     - wget
     - wireguard-arch
     - wireguard-tools
+    - xfsprogs
     - zsh
 
 - name: install extra packages

@@ -14,7 +14,7 @@ ansible-playbook -D -i hosts.yml main.yml --limit=gpd.wg.jaantoots.org -e ansibl
 Extract space separated lists of packages installed by different tasks:
 
 ```shell
-sed -nE '/pacman:/{n;h;x;s/.*//;x;:a;n;/^$/bb;/- /!d;H;$bb;ba};h;d;:b;x;s/[\n -]* / /g;p;d'  roles/*/tasks/main.yml
+sed -nE '/pacman:/{n;h;x;s/.*//;x;:a;n;/^$/bb;/- /!d;H;$bb;ba};h;d;:b;x;s/^\n//;s/ +- //g;s/\n/ /g;p;d' roles/*/tasks/main.yml
 ```
 
 And get installed sizes of (explicitly) installed packages:
