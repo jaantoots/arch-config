@@ -9,6 +9,14 @@ After [bootstrapping](https://github.com/jaantoots/arch-bootstrap) run the
 ansible-playbook -D -i hosts.yml main.yml --limit=gpd.wg.jaantoots.org -e ansible_host=gpd.tll.jaantoots.org -e ansible_user=root
 ```
 
+## TODO
+
+Manual tasks:
+
+- `base16_default-dark` command run
+- i3line compilation
+- xorg and lock screen backgrounds
+
 ## Notes
 
 Extract space separated lists of packages installed by different tasks:
