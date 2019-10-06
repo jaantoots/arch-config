@@ -127,6 +127,7 @@
     uid: "{{ item.uid }}"
     shell: /bin/zsh
     skeleton: /dev/null
+    append: yes
     groups: "{{ item.groups }}"
   loop: "{{ base_users }}"
 

@@ -12,6 +12,12 @@
     - powertop
     - tlp
 
+- name: add user to video group for backlight
+  user:
+    name: "{{ username }}"
+    append: yes
+    groups: video
+
 - name: add tlp configuration
   copy:
     src: tlp

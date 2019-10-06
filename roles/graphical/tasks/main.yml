@@ -28,6 +28,7 @@
 - name: install graphical packages
   pacman:
     name:
+    - alsa-utils
     - awesome-terminal-fonts
     - browserpass
     - browserpass-firefox
@@ -75,12 +76,14 @@
     - ttf-inconsolata
     - ttf-liberation
     - x11vnc
+    - xbindkeys
     - xorg-server
     - xorg-xdpyinfo
     - xorg-xev
     - xorg-xinit
     - xorg-xinput
     - xorg-xprop
+    - xss-lock
     - xterm
     - zathura
     - zathura-djvu
