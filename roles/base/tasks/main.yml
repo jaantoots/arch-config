@@ -24,6 +24,7 @@
     - kexec-tools
     - kitty-terminfo
     - linux
+    - linux-lts
     - linux-firmware
     - logrotate
     - lshw
@@ -53,6 +54,7 @@
     - vnstat
     - wget
     - wireguard-arch
+    - wireguard-lts
     - wireguard-tools
     - xfsprogs
     - zsh
