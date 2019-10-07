@@ -146,6 +146,13 @@
   notify:
   - restart networkd
 
+- name: add resolved configuration
+  copy:
+    src: resolved.conf
+    dest: /etc/systemd/resolved.conf
+  notify:
+  - restart resolved
+
 - name: add sshd configuration
   copy:
     src: sshd_config
