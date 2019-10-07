@@ -12,6 +12,7 @@
     - arch-install-scripts
     - base
     - base-devel
+    - bind-tools
     - dosfstools
     - etckeeper
     - git
@@ -61,6 +62,7 @@
     name:
     - archiso
     - exfat-utils
+    - geoip-database-extra
     - highlight
     - jq
     - lynx
@@ -75,6 +77,7 @@
     - syncthing
     - transmission-cli
     - unzip
+    - wireless_tools
     - xdelta3
     - youtube-dl
     - zsh-autosuggestions
