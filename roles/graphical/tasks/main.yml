@@ -35,7 +35,6 @@
     - caprine
     - chrome-token-signing
     - chromium
-    - dmenu
     - dunst
     - esteidpkcs11loader
     - feh
@@ -91,6 +90,13 @@
     - zathura-pdf-mupdf
     - zathura-ps
     - zulip-desktop
+
+- name: create dmenu symlink to rofi
+  file:
+    src: /usr/bin/rofi
+    dest: /usr/local/bin/dmenu
+    state: link
+    force: yes
 
 - name: install dev packages
   pacman:
