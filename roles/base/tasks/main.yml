@@ -141,10 +141,14 @@
     src: vconsole.conf
     dest: /etc/vconsole.conf
 
-- name: add default DHCP network configuration
+- name: add network configuration
   copy:
-    src: 90-dhcp.network
+    src: "{{ item }}"
     dest: /etc/systemd/network/
+  loop:
+  - 80-dhcp.network
+  - 90-wlan-dhcp.network
+  - 90-wlan.link
   notify:
   - restart networkd
 
