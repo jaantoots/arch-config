@@ -136,6 +136,12 @@
     groups: "{{ item.groups }}"
   loop: "{{ base_users }}"
 
+- name: add authorized keys for user
+  authorized_key:
+    user: "{{ username }}"
+    key: "{{ item }}"
+  loop: "{{ authorized_keys + authorized_keys_user_only }}"
+
 - name: add vconsole.conf
   copy:
     src: vconsole.conf

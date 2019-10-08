@@ -9,14 +9,6 @@
   roles:
   - base
 
-- name: apply user configuration
-  hosts: all
-  become: yes
-  vars_files:
-  - vars.yml
-  roles:
-  - user
-
 - name: apply graphical configuration
   hosts: graphical
   become: yes
