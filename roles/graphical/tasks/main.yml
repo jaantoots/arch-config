@@ -91,6 +91,11 @@
     - zathura-ps
     - zulip-desktop
 
+- name: configure typematic delay and rate as Xserver options
+  copy:
+    src: xserverrc
+    dest: /etc/X11/xinit/xserverrc
+
 - name: add input device configuration for xorg
   copy:
     src: "{{ item }}"
