@@ -11,6 +11,10 @@ ansible-playbook -D -i hosts.yml main.yml --limit=gpd.wg.jaantoots.org -e ansibl
 
 ## TODO
 
+Missing configuration:
+
+- firewall (nftables)
+
 Manual tasks:
 
 - `base16_default-dark` command run
