@@ -1,11 +1,6 @@
 ---
 # common tasks for all hosts
 
-- name: upgrade system
-  pacman:
-    update_cache: yes
-    upgrade: yes
-
 - name: install base packages
   pacman:
     name:
