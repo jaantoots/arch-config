@@ -91,6 +91,14 @@
     - zathura-ps
     - zulip-desktop
 
+- name: add input device configuration for xorg
+  copy:
+    src: "{{ item }}"
+    dest: /etc/X11/xorg.conf.d/
+  loop:
+  - 29-mouse.conf
+  - 30-touchpad.conf
+
 - name: create dmenu symlink to rofi
   file:
     src: /usr/bin/rofi
