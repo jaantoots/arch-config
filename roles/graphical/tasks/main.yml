@@ -60,7 +60,6 @@
     - playerctl
     - pulseaudio
     - pulseaudio-alsa
-    - pulseaudio-bluetooth
     - qdigidoc4
     - qrencode
     - qutebrowser

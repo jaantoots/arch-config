@@ -5,11 +5,11 @@
   pacman:
     name:
     - acpilight
-    - bluez
     - bluez-utils
     - iw
     - iwd
     - powertop
+    - pulseaudio-bluetooth
     - tlp
 
 - name: add user to video group for backlight
@@ -31,6 +31,7 @@
     state: started
     enabled: yes
   loop:
+  - bluetooth.service
   - iwd.service
   - tlp.service
 
