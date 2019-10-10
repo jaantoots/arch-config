@@ -1,6 +1,11 @@
 ---
 # handlers
 
+- name: restart iwd
+  systemd:
+    name: iwd.service
+    state: restarted
+
 - name: restart tlp
   systemd:
     name: tlp.service

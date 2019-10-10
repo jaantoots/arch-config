@@ -12,6 +12,13 @@
     - pulseaudio-bluetooth
     - tlp
 
+- name: add iwd configuration
+  copy:
+    src: iwd/
+    dest: /etc/iwd/
+  notify:
+  - restart iwd
+
 - name: add user to video group for backlight
   user:
     name: "{{ username }}"
