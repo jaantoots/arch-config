@@ -142,6 +142,13 @@
     src: vconsole.conf
     dest: /etc/vconsole.conf
 
+- name: add nftables configuration
+  copy:
+    src: nftables.conf
+    dest: /etc/nftables.conf
+  notify:
+  - reload nftables
+
 - name: add network configuration
   copy:
     src: "{{ item }}"
@@ -234,6 +241,7 @@
     enabled: yes
   loop:
   - fstrim.timer
+  - nftables.service
   - sshd.service
   - systemd-networkd.service
   - systemd-resolved.service
