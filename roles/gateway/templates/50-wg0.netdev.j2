@@ -1,0 +1,20 @@
+[NetDev]
+Name=wg0
+Kind=wireguard
+
+[WireGuard]
+PrivateKeyFile=/etc/systemd/network/wg0.key
+ListenPort=32487
+
+{% for host in groups['all'] %}
+{% if host != inventory_hostname %}
+# {{ host }}
+[WireGuardPeer]
+PublicKey={{ lookup('file', host + '/etc/systemd/network/wg0.pub') }}
+AllowedIPs={{ hostvars[host]['wg0_ipv4'] }},{{ hostvars[host]['wg0_ipv6'] }}
+{% if 'endpoint' in hostvars[host] %}
+Endpoint={{ hostvars[host]['endpoint'] }}:32487
+{% endif %}
+
+{% endif %}
+{% endfor %}

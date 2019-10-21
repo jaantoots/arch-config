@@ -9,6 +9,14 @@
   roles:
   - base
 
+- name: apply gateway configuration
+  hosts: gateway
+  become: yes
+  vars_files:
+  - vars.yml
+  roles:
+  - gateway
+
 - name: apply graphical configuration
   hosts: graphical
   become: yes

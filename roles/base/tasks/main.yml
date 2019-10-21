@@ -189,7 +189,7 @@
 - name: fetch WireGuard public key
   fetch:
     src: /etc/systemd/network/wg0.pub
-    dest: hosts
+    dest: files
 
 - name: read WireGuard public key
   slurp:
@@ -203,11 +203,11 @@
       # WireGuard VPN
 
       {% for host in groups['all']|sort %}
-      {{ hostvars[host]['wg0_ipv4'] }} {{ host }}
+      {{ hostvars[host]['wg0_ipv4'] | ipaddr('address') }} {{ host }}
       {% endfor %}
 
       {% for host in groups['all']|sort %}
-      {{ hostvars[host]['wg0_ipv6'] }} {{ host }}
+      {{ hostvars[host]['wg0_ipv6'] | ipaddr('address') }} {{ host }}
       {% endfor %}
 
 - name: add makepkg configuration
