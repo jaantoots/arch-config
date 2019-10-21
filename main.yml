@@ -15,6 +15,7 @@
   vars_files:
   - vars.yml
   roles:
+  - client
   - graphical
 
 - name: apply laptop configuration

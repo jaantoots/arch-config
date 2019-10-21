@@ -141,13 +141,6 @@
     src: vconsole.conf
     dest: /etc/vconsole.conf
 
-- name: add nftables configuration
-  copy:
-    src: nftables.conf
-    dest: /etc/nftables.conf
-  notify:
-  - reload nftables
-
 - name: add network configuration
   copy:
     src: "{{ item }}"
@@ -203,16 +196,6 @@
     src: /etc/systemd/network/wg0.pub
   register: wg_pubkey
 
-- name: add WireGuard configuration
-  template:
-    src: "{{ item }}.j2"
-    dest: "/etc/systemd/network/{{ item }}"
-  loop:
-  - 50-wg0.netdev
-  - 50-wg0.network
-  notify:
-  - restart networkd
-
 - name: add WireGuard hosts
   blockinfile:
     path: /etc/hosts
@@ -227,14 +210,6 @@
       {{ hostvars[host]['wg0_ipv6'] }} {{ host }}
       {% endfor %}
 
-- name: add pacman configuration
-  template:
-    src: pacman.conf.j2
-    dest: /etc/pacman.conf
-  notify:
-  - add pacman key
-  - refresh pacman
-
 - name: add makepkg configuration
   template:
     src: makepkg.conf.j2
@@ -247,7 +222,6 @@
     enabled: yes
   loop:
   - fstrim.timer
-  - nftables.service
   - sshd.service
   - systemd-networkd.service
   - systemd-resolved.service
