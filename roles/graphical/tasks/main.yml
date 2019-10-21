@@ -19,6 +19,7 @@
     - urlview
     - vdirsyncer
     - vifm
+    - wireless_tools
 
 - name: add urlview configuration
   copy:
