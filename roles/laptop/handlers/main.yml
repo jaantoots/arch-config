@@ -6,6 +6,11 @@
     name: iwd.service
     state: restarted
 
+- name: restart bluetooth
+  systemd:
+    name: bluetooth.service
+    state: restarted
+
 - name: restart tlp
   systemd:
     name: tlp.service

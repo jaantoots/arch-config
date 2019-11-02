@@ -19,6 +19,13 @@
   notify:
   - restart iwd
 
+- name: add bluetooth configuration
+  copy:
+    src: bluetooth/
+    dest: /etc/bluetooth/
+  notify:
+  - restart bluetooth
+
 - name: add user to video group for backlight
   user:
     name: "{{ username }}"
