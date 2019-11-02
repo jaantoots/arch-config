@@ -18,14 +18,6 @@
   notify:
   - restart networkd
 
-- name: add pacman configuration
-  template:
-    src: pacman.conf.j2
-    dest: /etc/pacman.conf
-  notify:
-  - add pacman key
-  - refresh pacman
-
 - name: start and enable services
   systemd:
     name: "{{ item }}"

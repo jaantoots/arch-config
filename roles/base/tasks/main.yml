@@ -215,6 +215,19 @@
     src: makepkg.conf.j2
     dest: /etc/makepkg.conf
 
+- name: add pacman configuration
+  copy:
+    src: pacman.conf
+    dest: /etc/pacman.conf
+  notify:
+  - add pacman key
+  - refresh pacman
+
+- name: add pacman placeholder configuration
+  copy:
+    src: 00-pacman.conf
+    dest: /etc/pacman.d/
+
 - name: start and enable services
   systemd:
     name: "{{ item }}"

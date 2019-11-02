@@ -10,11 +10,3 @@
   systemd:
     name: systemd-networkd.service
     state: restarted
-
-- name: add pacman key
-  shell: "pacman-key --recv-keys {{ user.gpg_key | quote }} && pacman-key --lsign-key {{ user.gpg_key | quote }}"
-
-- name: refresh pacman
-  pacman:
-    update_cache: yes
-    upgrade: yes

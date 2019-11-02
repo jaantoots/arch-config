@@ -16,6 +16,7 @@
   - vars.yml
   roles:
   - gateway
+  - pacman-server
 
 - name: apply graphical configuration
   hosts: graphical
@@ -33,3 +34,4 @@
   - vars.yml
   roles:
   - laptop
+  - pacman-client
