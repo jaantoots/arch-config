@@ -192,11 +192,6 @@
     src: /etc/systemd/network/wg0.pub
     dest: files
 
-- name: read WireGuard public key
-  slurp:
-    src: /etc/systemd/network/wg0.pub
-  register: wg_pubkey
-
 - name: add WireGuard hosts
   blockinfile:
     path: /etc/hosts
