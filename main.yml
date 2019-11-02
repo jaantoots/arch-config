@@ -18,6 +18,15 @@
   - gateway
   - pacman-server
 
+- name: apply storage configuration
+  hosts: storage
+  become: yes
+  vars_files:
+  - vars.yml
+  roles:
+  - storage
+  - pacman-client
+
 - name: apply graphical configuration
   hosts: graphical
   become: yes
