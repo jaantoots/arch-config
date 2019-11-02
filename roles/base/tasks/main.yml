@@ -16,6 +16,7 @@
     - intel-ucode
     - iotop
     - iperf3
+    - iptables-nft
     - kexec-tools
     - kitty-terminfo
     - linux
