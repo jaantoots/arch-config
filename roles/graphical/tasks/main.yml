@@ -151,3 +151,11 @@
     - qemu
     - qemu-arch-extra
     - qemu-user-static
+
+- name: start and enable services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+  - pcscd.socket
