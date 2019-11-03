@@ -22,6 +22,7 @@
     - linux
     - linux-lts
     - linux-firmware
+    - lm_sensors
     - logrotate
     - lshw
     - lsof
@@ -238,6 +239,7 @@
     enabled: yes
   loop:
   - fstrim.timer
+  - lm_sensors.service
   - nftables.service
   - sshd.service
   - systemd-networkd.service
