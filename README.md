@@ -13,7 +13,17 @@ ansible-playbook -D -i hosts.yml main.yml --limit=gpd.wg.jaantoots.org -e ansibl
 
 Missing configuration:
 
-- firewall (nftables)
+- Docker
+- nginx
+- NFS
+- fstab
+- nsupdate
+- certbot
+- smartd
+- mdadm
+- transmission
+- paccache
+- restic
 
 ## Notes
 
