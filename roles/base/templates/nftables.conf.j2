@@ -34,8 +34,8 @@ table inet filter {
 {% endif %}
 {% if inventory_hostname in groups['storage'] or inventory_hostname in groups['gateway'] %}
     # allow NFS
-    tcp dport {111, 2049} accept
-    udp dport {111, 2049} accept
+    tcp dport {111, 2049, 20048} accept
+    udp dport {111, 2049, 20048} accept
 
 {% endif %}
 {% if inventory_hostname in groups['gateway'] %}
