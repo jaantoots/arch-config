@@ -21,21 +21,26 @@ table inet filter {
     # allow ssh
     tcp dport ssh accept
 
-    # allow wireguard
-    udp dport 32487 accept
-
-    # allow NFS
-    tcp dport {111, 2049} accept
-    udp dport {111, 2049} accept
-
-    # allow https?
-    tcp dport {80, 443} accept
-
     # allow syncthing
     tcp dport 22000 accept
     udp dport 21027 accept
     # allow syncthing GUI from wg0
     iifname wg0 tcp dport 8384 accept
+
+{% if inventory_hostname not in groups['laptops'] %}
+    # allow wireguard
+    udp dport 32487 accept
+
+{% endif %}
+{% if inventory_hostname in groups['storage'] or inventory_hostname in groups['gateway'] %}
+    # allow NFS
+    tcp dport {111, 2049} accept
+    udp dport {111, 2049} accept
+
+{% endif %}
+{% if inventory_hostname in groups['gateway'] %}
+    # allow https?
+    tcp dport {80, 443} accept
 
     # allow tinc
     tcp dport 655 accept
@@ -45,6 +50,15 @@ table inet filter {
     tcp dport 8080 accept
     udp dport {8080, 3478, 10001} accept
 
+{% endif %}
+{% if inventory_hostname in groups['storage'] %}
+    # allow transmission
+    tcp dport 56338 accept
+    udp dport 56338 accept
+    # allow transmission RPC from wg0
+    iifname wg0 tcp dport 9091 accept
+
+{% endif %}
     # log and count other
     limit rate 4/minute log prefix "[nftables filter] " flags all
     counter
@@ -52,21 +66,23 @@ table inet filter {
 
   chain forward {
     type filter hook forward priority filter; policy drop;
+{% if inventory_hostname in groups['gateway'] %}
 
     # allow established/related connections
     ct state { established, related } accept
 
     # forward wireguard traffic
     iifname wg0 oifname wg0 accept
+{% endif %}
   }
 
   chain output {
     type filter hook output priority filter;
-
   }
 
 }
 
+{% if inventory_hostname in groups['gateway'] %}
 table ip nat {
 
   chain prerouting {
@@ -79,4 +95,5 @@ table ip nat {
 
 }
 
+{% endif %}
 # vim:set ts=2 sw=2 et:

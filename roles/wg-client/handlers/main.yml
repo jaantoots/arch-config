@@ -1,11 +1,6 @@
 ---
 # handlers
 
-- name: reload nftables
-  systemd:
-    name: nftables.service
-    state: reloaded
-
 - name: restart networkd
   systemd:
     name: systemd-networkd.service

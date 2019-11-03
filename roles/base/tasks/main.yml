@@ -224,6 +224,13 @@
     src: 00-pacman.conf
     dest: /etc/pacman.d/
 
+- name: add nftables configuration
+  template:
+    src: nftables.conf.j2
+    dest: /etc/nftables.conf
+  notify:
+  - reload nftables
+
 - name: start and enable services
   systemd:
     name: "{{ item }}"
@@ -231,6 +238,7 @@
     enabled: yes
   loop:
   - fstrim.timer
+  - nftables.service
   - sshd.service
   - systemd-networkd.service
   - systemd-resolved.service
