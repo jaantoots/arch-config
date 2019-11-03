@@ -84,7 +84,11 @@ UsePAM yes
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
+{% if inventory_hostname in groups['workstations'] %}
+X11Forwarding yes
+{% else %}
 #X11Forwarding no
+{% endif %}
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
