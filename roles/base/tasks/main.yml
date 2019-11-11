@@ -102,7 +102,7 @@
   authorized_key:
     user: ansible
     key: "{{ item }}"
-  loop: "{{ authorized_keys }}"
+  loop: "{{ user.authorized_keys }}"
 
 - name: create group sudo
   group:
@@ -134,9 +134,9 @@
 
 - name: add authorized keys for user
   authorized_key:
-    user: "{{ username }}"
+    user: "{{ user.username }}"
     key: "{{ item }}"
-  loop: "{{ authorized_keys + authorized_keys_user_only }}"
+  loop: "{{ user.authorized_keys + user.authorized_keys_user_only }}"
 
 - name: add vconsole.conf
   copy:

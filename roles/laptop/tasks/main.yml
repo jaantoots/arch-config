@@ -28,7 +28,7 @@
 
 - name: add user to video group for backlight
   user:
-    name: "{{ username }}"
+    name: "{{ user.username }}"
     append: yes
     groups: video
 
