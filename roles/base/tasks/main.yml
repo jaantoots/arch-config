@@ -220,15 +220,20 @@
   - add pacman key
   - refresh pacman
 
-- name: add pacman placeholder configuration
+- name: add pacman repositories
   copy:
-    src: 00-pacman.conf
+    src: "{{ item }}"
     dest: /etc/pacman.d/
+  loop:
+  - 00-pacman.conf
+  - 50-repos.conf
+  notify:
+  - refresh pacman
 
-- name: add pacman AUR repository
+- name: add pacman remote servers
   template:
-    src: 50-aur.conf.j2
-    dest: /etc/pacman.d/50-aur.conf
+    src: 50-remote.servers.j2
+    dest: /etc/pacman.d/50-remote.servers
   notify:
   - refresh pacman
 

@@ -1,7 +1,10 @@
 ---
 # pacman build host tasks
 
-- name: add pacman build cache
+- name: add pacman build cache and local servers
   copy:
-    src: 40-build.conf
-    dest: /etc/pacman.d/
+    src: "{{ item }}"
+    dest: /etc/pacman.d
+  loop:
+  - 40-build.conf
+  - 10-local.servers
