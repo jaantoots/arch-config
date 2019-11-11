@@ -1,0 +1,24 @@
+---
+# variable definitions
+
+user:
+  name: Jaan Toots
+  email: jaan@jaantoots.org
+  gpg_key: 898F754DC9C848CDAC4D33029AE22DC9DF6496F6
+  username: jaan
+  authorized_keys:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMTSn9LSly4Gic5/s9JqYfvRTi+ZkwoZd/YTWaxmPA7 jaan@caracal"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN0xreG4XPAgqvyPqP58HYMGTjHKyh59XGDdOUgjVIEN jaan@falstaff"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPMqraBY0913sVm751oqvM6tZoIQ/dBjOAIoZmukhsjo jaan@gpd"
+  authorized_keys_user_only:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBJTerAphJTvIuKo4igxJjurHOYTGR9oxI0DH3pt2dVV jaan@oneplus5t"
+repo_url: https://archlinux.jaan.xyz/$repo
+base_groups:
+- name: download
+  gid: 2000
+base_users:
+- name: jaan
+  uid: 1000
+  groups:
+  - sudo
+  - download
