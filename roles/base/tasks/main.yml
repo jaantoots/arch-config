@@ -225,6 +225,13 @@
     src: 00-pacman.conf
     dest: /etc/pacman.d/
 
+- name: add pacman AUR repository
+  template:
+    src: 50-aur.conf.j2
+    dest: /etc/pacman.d/50-aur.conf
+  notify:
+  - refresh pacman
+
 - name: add nftables configuration
   template:
     src: nftables.conf.j2

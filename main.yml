@@ -16,7 +16,6 @@
   - vars.yml
   roles:
   - wg-server
-  - pacman-server
 
 - name: apply storage configuration
   hosts: storage
@@ -25,7 +24,6 @@
   - vars.yml
   roles:
   - wg-storage
-  - pacman-client
 
 - name: apply workstation configuration
   hosts: workstations
@@ -34,7 +32,7 @@
   - vars.yml
   roles:
   - wg-storage
-  - pacman-server
+  - pacman-build
   - graphical
 
 - name: apply laptop configuration
@@ -44,6 +42,5 @@
   - vars.yml
   roles:
   - wg-client
-  - pacman-client
   - graphical
   - laptop

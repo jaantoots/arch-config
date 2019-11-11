@@ -1,9 +1,0 @@
----
-# pacman server tasks
-
-- name: add pacman custom cache and repository
-  copy:
-    src: 50-custom.conf
-    dest: /etc/pacman.d/
-  notify:
-  - refresh pacman

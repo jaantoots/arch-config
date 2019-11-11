@@ -1,0 +1,7 @@
+---
+# pacman build host tasks
+
+- name: add pacman build cache
+  copy:
+    src: 40-build.conf
+    dest: /etc/pacman.d/

@@ -1,7 +1,0 @@
----
-# handlers
-
-- name: refresh pacman
-  pacman:
-    update_cache: yes
-    upgrade: yes
