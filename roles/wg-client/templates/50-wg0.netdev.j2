@@ -5,8 +5,12 @@ Kind=wireguard
 [WireGuard]
 PrivateKeyFile=/etc/systemd/network/wg0.key
 
+{% for host in groups['gateway'] %}
+# {{ host }}
 [WireGuardPeer]
-PublicKey={{ wg0_bastion_pubkey }}
-Endpoint={{ wg0_bastion_endpoint }}
+PublicKey={{ lookup('file', host + '/etc/systemd/network/wg0.pub') }}
+AllowedIPs={{ hostvars[host]['wg0_ipv4'] }},{{ hostvars[host]['wg0_ipv6'] }}
+Endpoint={{ hostvars[host]['public_endpoint'] }}:32487
 PersistentKeepalive=25
-AllowedIPs={{ wg0_subnets | join(",") }}
+
+{% endfor %}
