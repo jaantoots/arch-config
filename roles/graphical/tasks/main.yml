@@ -119,7 +119,6 @@
     - aurutils
     - aws-cli
     - backblaze-b2
-    - balena-cli
     - devtools
     - gnuplot
     - go
