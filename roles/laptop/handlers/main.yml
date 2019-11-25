@@ -6,6 +6,11 @@
     name: iwd.service
     state: restarted
 
+- name: restart networkd
+  systemd:
+    name: systemd-networkd.service
+    state: restarted
+
 - name: restart bluetooth
   systemd:
     name: bluetooth.service

@@ -148,9 +148,7 @@
     src: "{{ item }}"
     dest: /etc/systemd/network/
   loop:
-  - 79-wlan.link
   - 80-eth.network
-  - 80-wlan.network
   notify:
   - restart networkd
 

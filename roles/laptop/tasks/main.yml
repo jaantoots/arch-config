@@ -19,6 +19,16 @@
   notify:
   - restart iwd
 
+- name: add network configuration
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/network/
+  loop:
+  - 79-wlan.link
+  - 80-wlan.network
+  notify:
+  - restart networkd
+
 - name: add bluetooth configuration
   copy:
     src: bluetooth/
